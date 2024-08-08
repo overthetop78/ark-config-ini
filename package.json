@@ -4,17 +4,22 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "start-dev": "ng serve --host 0.0.0.0 --disable-host-check",
+    "start-dev-ssl": "ng serve --host 0.0.0.0 --disable-host-check --ssl --ssl-cert /etc/letsencrypt/live/informaweb.freeboxos.fr/fullchain.pem --ssl-key /etc/letsencrypt/live/informaweb.freeboxos.fr/privkey.pem",
+    "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "version-bump": "node version-bump.js"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
+    "@angular/cdk": "^16.2.14",
     "@angular/common": "^16.2.0",
     "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
     "@angular/forms": "^16.2.0",
+    "@angular/material": "^16.2.14",
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
