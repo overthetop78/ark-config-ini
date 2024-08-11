@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
+  onToggleSidenav() {
+    this.sidenav.toggle();
+  }
 }

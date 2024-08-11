@@ -1,0 +1,63 @@
+<div class="create-levels-container">
+  <h1>Création des Niveaux pour les joueurs et les dinosaures</h1>
+
+  <div class="form-container">
+    <form [formGroup]="playerForm" (ngSubmit)="onSubmitPlayer()" class="level-form">
+      <h2>Joueurs</h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Niveau Maximum</mat-label>
+        <input matInput formControlName="maxLevel" placeholder="Entrez le niveau maximum" type="number" min="1"
+          max="1000">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Multiplicateur</mat-label>
+        <input matInput formControlName="multiplier" placeholder="Entrez le multiplicateur" type="number" min="1"
+          max="10">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ratio</mat-label>
+        <input matInput formControlName="ratio" placeholder="Entrez le ratio" type="number" min="1" max="10">
+      </mat-form-field>
+      <!-- Nouveau champ pour le maximum de points d'engrammes -->
+      <mat-form-field appearance="outline">
+        <mat-label>Points d'Engrammes Maximum</mat-label>
+        <input matInput formControlName="maxEngramPoints" placeholder="Entrez le maximum de points d'engrammes"
+          type="number" min="500">
+      </mat-form-field>
+      <!-- Nouveau champ pour le maximum de level pour les engrammes -->
+      <mat-form-field appearance="outline">
+        <mat-label>Niveau d'Engrammes Maximum</mat-label>
+        <input matInput formControlName="maxEngramLevels" placeholder="Entrez le maximum de niveau pour les engrammes"
+          type="number" min="20">
+      </mat-form-field>
+      <div class="maximum-experience">
+        <p>Expérience maximum:</p>
+        <span class="value">{{ maximumExperiencePlayer }}</span>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!playerForm.valid">Sauvegarder</button>
+    </form>
+
+    <form [formGroup]="dinoForm" (ngSubmit)="onSubmitDino()" class="level-form">
+      <h2>Dinosaures</h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Niveau Maximum</mat-label>
+        <input matInput formControlName="maxLevel" placeholder="Entrez le niveau maximum" type="number" min="1"
+          max="1000">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Multiplicateur</mat-label>
+        <input matInput formControlName="multiplier" placeholder="Entrez le multiplicateur" type="number" min="1"
+          max="10">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ratio</mat-label>
+        <input matInput formControlName="ratio" placeholder="Entrez le ratio" type="number" min="1" max="10">
+      </mat-form-field>
+      <div class="maximum-experience">
+        <p>Expérience maximum:</p>
+        <span class="value">{{ maximumExperienceDino }}</span>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!dinoForm.valid">Sauvegarder</button>
+    </form>
+  </div>
+</div>

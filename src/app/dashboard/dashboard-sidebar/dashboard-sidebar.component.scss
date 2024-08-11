@@ -1,0 +1,28 @@
+.mat-nav-list {
+  padding: 0;
+}
+
+.mat-list-item {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  padding: 15px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.mat-list-item:hover {
+  background-color: #f0f0f0;
+  color: #1976d2; /* Couleur du texte au survol */
+}
+
+.mat-list-item.active {
+  background-color: #e0e0e0;
+  color: #1976d2; /* Couleur du texte actif */
+}
+
+.mat-list-item span {
+  margin-left: 10px;
+}

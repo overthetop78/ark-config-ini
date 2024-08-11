@@ -1,0 +1,68 @@
+<div class="points-info-container">
+  <div class="points-info">
+    <p class="points-total">Points Restants Total: <span>{{ remainingPoints }}/{{ totalPoints }}</span></p>
+    <p class="points-level">Points Restants pour ce Niveau: <span>{{ remainingPointsForLevel }}/{{
+        totalPointsForLevel}}</span></p>
+  </div>
+</div>
+<div class="engrams-container">
+  <h1>Gestion des Engrammes</h1>
+
+  <form [formGroup]="engramsForm" (ngSubmit)="onSubmit()">
+    <button mat-raised-button color="primary" type="button btn-rempl" (click)="fillTable()"
+      [disabled]="!playerData">Remplir
+      automatiquement</button>
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="engramDataSource" class="mat-elevation-z8">
+
+        <!-- Nom en Français -->
+        <ng-container matColumnDef="nameFr">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let engram">
+            {{ engram.nameFr }}
+          </td>
+        </ng-container>
+
+        <!-- Level Requirement -->
+        <ng-container matColumnDef="level">
+          <th mat-header-cell *matHeaderCellDef> Niveau Requis </th>
+          <td mat-cell *matCellDef="let engram">
+            <input matInput type="number" formControlName="level_{{ engram.position }}" placeholder="Niveau" min="1"
+              max="1000" (input)="onLevelInput($event, engram.position)">
+          </td>
+        </ng-container>
+
+        <!-- Points Requirement -->
+        <ng-container matColumnDef="points">
+          <th mat-header-cell *matHeaderCellDef> Points Requis </th>
+          <td mat-cell *matCellDef="let engram">
+            <input matInput type="number" formControlName="points_{{ engram.position }}" placeholder="Points" min="1"
+              max="100" (input)="onPointsInput($event, engram.position)">
+          </td>
+        </ng-container>
+
+        <!-- Remove Pre-Requisite -->
+        <ng-container matColumnDef="removePrereq">
+          <th mat-header-cell *matHeaderCellDef> Supprimer Prérequis </th>
+          <td mat-cell *matCellDef="let engram">
+            <mat-checkbox formControlName="removePrereq_{{ engram.position }}"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Engram Hidden -->
+        <ng-container matColumnDef="hidden">
+          <th mat-header-cell *matHeaderCellDef> Cacher Engramme </th>
+          <td mat-cell *matCellDef="let engram">
+            <mat-checkbox formControlName="hidden_{{ engram.position }}"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+  </form>
+</div>

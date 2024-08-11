@@ -1,0 +1,15 @@
+.footer-toolbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 64px;
+  color: white;
+  z-index: 99;
+  align-items: center;
+}
+
+.footer-text {
+  font-size: 18px;
+}

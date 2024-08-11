@@ -1,0 +1,99 @@
+.multipliers-container {
+  max-width: auto; /* Augmenter la largeur globale */
+  margin: 0 auto;
+  padding: 20px;
+
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .forms-wrapper {
+    display: flex;
+    justify-content: space-evenly; /* Ajouter de l'espace entre les formulaires */
+    gap: 30px;
+
+    form {
+      width: 40%; /* Augmenter légèrement la largeur */
+      padding: 0 30px; /* Réduire la hauteur globale */
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .form-group {
+    margin-bottom: 0.5rem; /* Réduire encore l'espace entre les groupes */
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      label {
+        flex: 0 0 130px; /* Taille fixe pour le label, plus large */
+        font-weight: bold;
+        font-size: 0.9rem; /* Réduire légèrement la taille de la police */
+      }
+
+      input {
+        width: 50px; /* Taille des inputs plus petite */
+        padding: 0.3rem;
+        font-size: 0.8rem; /* Réduire la taille de la police */
+        margin-right: 10px;
+      }
+
+      .points-gain {
+        flex: 0 0 60px; /* Taille fixe et large pour la case des points */
+        background-color: #f1f1f1;
+        padding: 0.3rem 0.4rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 0.8rem;
+        color: #007bff;
+        text-align: center;
+        margin-left: auto; /* Positionner la case des points à droite */
+      }
+    }
+
+    .description {
+      font-size: 0.7rem;
+      color: #999;
+      font-style: italic;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .points-label {
+    font-size: 0.8rem;
+    color: #007bff;
+    text-align: right;
+    margin-bottom: 10px; /* Ajustement pour placer au bon endroit */
+    margin-top: -15px; /* Ajuster pour rapprocher du tableau */
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem; /* Réduire la taille du bouton */
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem; /* Réduire la taille de la police */
+    margin: 20px 0;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+}

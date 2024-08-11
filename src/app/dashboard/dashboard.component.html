@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <app-dashboard-sidebar></app-dashboard-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-dashboard-header (toggleSidenav)="onToggleSidenav()"></app-dashboard-header>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+    <app-dashboard-footer></app-dashboard-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

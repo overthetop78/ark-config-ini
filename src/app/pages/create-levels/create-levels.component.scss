@@ -1,0 +1,75 @@
+.create-levels-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .level-form {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 20px;
+
+      & input {
+        color: black;
+        font-size: 16px;
+      }
+    }
+
+    button {
+      align-self: center;
+      margin-top: 20px;
+    }
+  }
+}
+
+.maximum-experience {
+  background: linear-gradient(135deg, #e0e0e0, #ffffff); /* Dégradé doux pour le fond */
+  padding: 20px; /* Espacement interne plus généreux */
+  border-radius: 12px; /* Coins plus arrondis pour un look plus doux */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée pour un effet de profondeur marqué */
+  border: 1px solid #ccc; /* Bordure légère pour mieux délimiter la section */
+  text-align: center; /* Centre le contenu */
+
+  p {
+    margin: 0;
+    font-size: 1.2rem; /* Taille du texte descriptif */
+    font-weight: 400; /* Texte moins gras pour la description */
+    color: #555; /* Couleur plus claire pour la description */
+    text-shadow: none; /* Pas d'ombre pour le texte descriptif */
+  }
+
+  .value {
+    display: block; /* Pour que la valeur soit sur une ligne séparée */
+    font-size: 2rem; /* Taille augmentée pour la valeur */
+    font-weight: bold; /* Texte en gras pour la valeur */
+    color: #222; /* Couleur plus sombre pour la valeur */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ombre pour la valeur */
+    margin-top: 5px; /* Espacement entre le texte descriptif et la valeur */
+  }
+}
+

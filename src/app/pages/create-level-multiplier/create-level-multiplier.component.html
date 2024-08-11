@@ -1,0 +1,47 @@
+<div class="multipliers-container">
+  <h1>Configuration des Multiplicateurs de Niveau</h1>
+
+  <p class="description">
+    La base de points gagnés par niveau est de 10. Le multiplicateur ajustera cette valeur pour chaque statistique.
+    <br />
+    Note : Ne pas trop augmenter le multiplicateur de la vitesse, cela peut rendre les personnages/dinos trop rapides.
+  </p>
+
+  <div class="forms-wrapper">
+    <form [formGroup]="playerForm" (ngSubmit)="onSubmitPlayer()">
+      <h2>Multiplicateurs pour les Joueurs</h2>
+
+      <div class="points-label">Points par Niveau</div>
+
+      <div *ngFor="let stat of playerStats; let i = index" class="form-group">
+        <div class="form-row">
+          <label [for]="'player_' + stat.key">{{ stat.label }}</label>
+          <input [id]="'player_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
+            (input)="onMultiplierChange('player', stat.key, $event)" />
+          <div class="points-gain">{{ stat.pointsGain }}</div>
+        </div>
+        <p class="description">{{ stat.description }}</p>
+      </div>
+
+      <button type="submit">Sauvegarder Joueur</button>
+    </form>
+
+    <form [formGroup]="dinoForm" (ngSubmit)="onSubmitDino()">
+      <h2>Multiplicateurs pour les Dinos</h2>
+
+      <div class="points-label">Points par Niveau</div>
+
+      <div *ngFor="let stat of dinoStats; let i = index" class="form-group">
+        <div class="form-row">
+          <label [for]="'dino_' + stat.key">{{ stat.label }}</label>
+          <input [id]="'dino_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
+            (input)="onMultiplierChange('dino', stat.key, $event)" />
+          <div class="points-gain">{{ stat.pointsGain }}</div>
+        </div>
+        <p class="description">{{ stat.description }}</p>
+      </div>
+
+      <button type="submit">Sauvegarder Dino</button>
+    </form>
+  </div>
+</div>
