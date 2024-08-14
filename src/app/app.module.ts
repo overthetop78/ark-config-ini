@@ -12,9 +12,21 @@ import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard
 import { DashboardSidebarComponent } from './dashboard/dashboard-sidebar/dashboard-sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Material } from './material';
+import { CreateBreedingSettingsComponent } from './pages/create-breeding-settings/create-breeding-settings.component';
+import { CreateDinoSettingsComponent } from './pages/create-dino-settings/create-dino-settings.component';
+import { CreateDinoSpawnWeightMultiplierComponent } from './pages/create-dino-spawn-weight-multiplier/create-dino-spawn-weight-multiplier.component';
 import { CreateEngramsComponent } from './pages/create-engrams/create-engrams.component';
-import { CreateLevelsComponent } from './pages/create-levels/create-levels.component';
+import { CreateFarmingSettingsComponent } from './pages/create-farming-settings/create-farming-settings.component';
+import { CreateGameplaySettingsComponent } from './pages/create-gameplay-settings/create-gameplay-settings.component';
 import { CreateLevelMultiplierComponent } from './pages/create-level-multiplier/create-level-multiplier.component';
+import { CreateLevelsComponent } from './pages/create-levels/create-levels.component';
+import { CreateLootSettingsComponent } from './pages/create-loot-settings/create-loot-settings.component';
+import { CreatePlayerSettingsComponent } from './pages/create-player-settings/create-player-settings.component';
+import { CreatePveSettingsComponent } from './pages/create-pve-settings/create-pve-settings.component';
+import { CreatePvpSettingsComponent } from './pages/create-pvp-settings/create-pvp-settings.component';
+import { CreateRecipeSettingsComponent } from './pages/create-recipe-settings/create-recipe-settings.component';
+import { CreateResourceSettingsComponent } from './pages/create-resource-settings/create-resource-settings.component';
+import { CreateStructureSettingsComponent } from './pages/create-structure-settings/create-structure-settings.component';
 registerLocaleData(localeFr);
 const lang: string = 'fr-FR';
 
@@ -28,6 +40,18 @@ const lang: string = 'fr-FR';
     CreateLevelsComponent,
     CreateEngramsComponent,
     CreateLevelMultiplierComponent,
+    CreateDinoSpawnWeightMultiplierComponent,
+    CreateBreedingSettingsComponent,
+    CreateDinoSettingsComponent,
+    CreateGameplaySettingsComponent,
+    CreateFarmingSettingsComponent,
+    CreateLootSettingsComponent,
+    CreatePlayerSettingsComponent,
+    CreatePveSettingsComponent,
+    CreatePvpSettingsComponent,
+    CreateRecipeSettingsComponent,
+    CreateResourceSettingsComponent,
+    CreateStructureSettingsComponent,
   ],
   imports: [
     BrowserModule,

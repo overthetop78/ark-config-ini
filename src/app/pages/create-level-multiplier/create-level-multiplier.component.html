@@ -8,40 +8,79 @@
   </p>
 
   <div class="forms-wrapper">
-    <form [formGroup]="playerForm" (ngSubmit)="onSubmitPlayer()">
-      <h2>Multiplicateurs pour les Joueurs</h2>
+    <div class="upper-forms">
+      <form [formGroup]="playerForm" (ngSubmit)="onSubmitPlayer()">
+        <h2>Multiplicateurs pour les Joueurs</h2>
 
-      <div class="points-label">Points par Niveau</div>
+        <div class="points-label">Points par Niveau</div>
 
-      <div *ngFor="let stat of playerStats; let i = index" class="form-group">
-        <div class="form-row">
-          <label [for]="'player_' + stat.key">{{ stat.label }}</label>
-          <input [id]="'player_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
-            (input)="onMultiplierChange('player', stat.key, $event)" />
-          <div class="points-gain">{{ stat.pointsGain }}</div>
+        <div *ngFor="let stat of playerStats; let i = index" class="form-group">
+          <div class="form-row">
+            <label [for]="'player_' + stat.key">{{ stat.label }}</label>
+            <input [id]="'player_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
+              (input)="onMultiplierChange('player', stat.key, $event)" />
+            <div class="points-gain">{{ stat.pointsGain }}</div>
+          </div>
+          <p class="description">{{ stat.description }}</p>
         </div>
-        <p class="description">{{ stat.description }}</p>
+
+        <button type="submit">Sauvegarder Joueur</button>
+        </form>
+
+      <form [formGroup]="dinoWildForm" (ngSubmit)="onSubmitDinoWild()">
+        <h2>Multiplicateurs pour les Dinos Sauvages</h2>
+
+        <div class="points-label">Points par Niveau</div>
+
+        <div *ngFor="let stat of dinoWildStats; let i = index" class="form-group">
+          <div class="form-row">
+            <label [for]="'dinoWild_' + stat.key">{{ stat.label }}</label>
+            <input [id]="'dinoWild_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
+              (input)="onMultiplierChange('dinoWild', stat.key, $event)" />
+            <div class="points-gain">{{ stat.pointsGain }}</div>
+          </div>
+          <p class="description">{{ stat.description }}</p>
+        </div>
+
+        <button type="submit">Sauvegarder Dinos Sauvages</button>
+      </form>
       </div>
 
-      <button type="submit">Sauvegarder Joueur</button>
-    </form>
+      <div class="lower-forms">
+        <form [formGroup]="dinoTamedForm" (ngSubmit)="onSubmitDinoTamed()">
+          <h2>Multiplicateurs pour les Dinos Apprivoisés</h2>
 
-    <form [formGroup]="dinoForm" (ngSubmit)="onSubmitDino()">
-      <h2>Multiplicateurs pour les Dinos</h2>
+        <div class="points-label">Points par Niveau</div>
 
-      <div class="points-label">Points par Niveau</div>
+        <div *ngFor="let stat of dinoTamedStats; let i = index" class="form-group">
+          <div class="form-row">
+            <label [for]="'dinoTamed_' + stat.key">{{ stat.label }}</label>
+            <input [id]="'dinoTamed_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
+              (input)="onMultiplierChange('dinoTamed', stat.key, $event)" />
+            <div class="points-gain">{{ stat.pointsGain }}</div>
+            </div>
+            <p class="description">{{ stat.description }}</p>
+            </div>
 
-      <div *ngFor="let stat of dinoStats; let i = index" class="form-group">
-        <div class="form-row">
-          <label [for]="'dino_' + stat.key">{{ stat.label }}</label>
-          <input [id]="'dino_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
-            (input)="onMultiplierChange('dino', stat.key, $event)" />
-          <div class="points-gain">{{ stat.pointsGain }}</div>
+        <button type="submit">Sauvegarder Dinos Apprivoisés</button>
+        </form>
+<form [formGroup]="dinoTamedAffinityForm" (ngSubmit)="onSubmitDinoTamedAffinity()">
+  <h2>Multiplicateurs pour les Dinos Apprivoisés (Affinité)</h2>
+
+  <div class="points-label">Points par Niveau</div>
+
+  <div *ngFor="let stat of dinoTamedAffinityStats; let i = index" class="form-group">
+    <div class="form-row">
+      <label [for]="'dinoTamedAffinity_' + stat.key">{{ stat.label }}</label>
+      <input [id]="'dinoTamedAffinity_' + stat.key" [formControlName]="stat.key" type="number" min="1" max="100"
+        (input)="onMultiplierChange('dinoTamedAffinity', stat.key, $event)" />
+      <div class="points-gain">{{ stat.pointsGain }}</div>
+          </div>
+          <p class="description">{{ stat.description }}</p>
         </div>
-        <p class="description">{{ stat.description }}</p>
-      </div>
 
-      <button type="submit">Sauvegarder Dino</button>
-    </form>
-  </div>
-</div>
+        <button type="submit">Sauvegarder Dinos Apprivoisés (Affinité)</button>
+        </form>
+        </div>
+        </div>
+        </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LevelStorageService } from 'src/app/services/level-storage.service';
+import { LevelExperienceStorageService } from 'src/app/services/level-experience-storage.service';
 
 @Component({
   selector: 'app-create-level-multiplier',
@@ -10,7 +10,9 @@ import { LevelStorageService } from 'src/app/services/level-storage.service';
 export class CreateLevelMultiplierComponent implements OnInit {
 
   playerForm: FormGroup;
-  dinoForm: FormGroup;
+  dinoWildForm: FormGroup;
+  dinoTamedForm: FormGroup;
+  dinoTamedAffinityForm: FormGroup;
 
   basePoints: number = 10; // Base de points par niveau
 
@@ -29,15 +31,18 @@ export class CreateLevelMultiplierComponent implements OnInit {
     { id: 11, key: 'craft', label: 'Vitesse de fabrication', description: 'Augmente la vitesse de fabrication d\'objets et de récolte des dinos par niveau', pointsGain: 0 },
   ];
 
-
-  dinoStats = JSON.parse(JSON.stringify(this.playerStats)); // Dupliquer les stats des joueurs pour les dinos
+  dinoWildStats: { id: number, key: string, label: string, description: string, pointsGain: number }[] = JSON.parse(JSON.stringify(this.playerStats)); // Copier les stats des joueurs pour les dinos sauvages
+  dinoTamedStats: { id: number, key: string, label: string, description: string, pointsGain: number }[] = JSON.parse(JSON.stringify(this.playerStats)); // Copier les stats pour les dinos apprivoisés
+  dinoTamedAffinityStats: { id: number, key: string, label: string, description: string, pointsGain: number }[] = JSON.parse(JSON.stringify(this.playerStats)); // Copier les stats pour les dinos apprivoisés (affinité)
 
   constructor(
     private fb: FormBuilder,
-    private levelStorageService: LevelStorageService,
+    private levelExperienceStorageService: LevelExperienceStorageService,
   ) {
     this.playerForm = this.fb.group(this.createFormGroup());
-    this.dinoForm = this.fb.group(this.createFormGroup());
+    this.dinoWildForm = this.fb.group(this.createFormGroup());
+    this.dinoTamedForm = this.fb.group(this.createFormGroup());
+    this.dinoTamedAffinityForm = this.fb.group(this.createFormGroup());
   }
 
   ngOnInit(): void {
@@ -48,57 +53,121 @@ export class CreateLevelMultiplierComponent implements OnInit {
     return this.playerStats.reduce((acc: { [key: string]: any }, stat) => {
       acc[stat.key] = [1, [Validators.required, Validators.min(1)]];
       this.onMultiplierChange('player', stat.key, { target: { value: 1 } });
-      this.onMultiplierChange('dino', stat.key, { target: { value: 1 } });
       return acc;
     }, {});
   }
 
   loadInitialData() {
-    const playerData = this.levelStorageService.getPlayerLevelData();
+    const playerData = this.levelExperienceStorageService.getPlayerLevelExperience();
     if (playerData) {
       this.playerForm.patchValue(playerData);
     }
 
-    const dinoData = this.levelStorageService.getDinoLevelData();
-    if (dinoData) {
-      this.dinoForm.patchValue(dinoData);
+    const dinoWildData = this.levelExperienceStorageService.getDinoWildLevelExperience();
+    if (dinoWildData) {
+      this.dinoWildForm.patchValue(dinoWildData);
+    }
+
+    const dinoTamedData = this.levelExperienceStorageService.getDinoTamedLevelExperience();
+    if (dinoTamedData) {
+      this.dinoTamedForm.patchValue(dinoTamedData);
+    }
+
+    const dinoTamedAffinityData = this.levelExperienceStorageService.getDinoTamedAffinityLevelExperience();
+    if (dinoTamedAffinityData) {
+      this.dinoTamedAffinityForm.patchValue(dinoTamedAffinityData);
     }
   }
 
-  onMultiplierChange(type: 'player' | 'dino', key: string, event: any) {
+  onMultiplierChange(type: string, key: string, event: any) {
     const value = event.target.value;
-    if (event.target.value < 1) event.target.value = 1;
-    else if (event.target.value > 100) event.target.value = 100;
-
     const multiplier = parseFloat(value) || 1;
     const pointsGain = multiplier * this.basePoints;
 
-    if (type === 'player') {
-      const stat = this.playerStats.find(stat => stat.key === key);
-      if (stat) {
-        stat.pointsGain = pointsGain;
-      }
-    } else if (type === 'dino') {
-      const stat = this.dinoStats.find((stat: { key: string; }) => stat.key === key);
-      if (stat) {
-        stat.pointsGain = pointsGain;
-      }
+    switch (type) {
+      case 'player':
+        this.updateStatPointsGain(this.playerStats, key, pointsGain);
+        break;
+      case 'dinoWild':
+        this.updateStatPointsGain(this.dinoWildStats, key, pointsGain);
+        break;
+      case 'dinoTamed':
+        this.updateStatPointsGain(this.dinoTamedStats, key, pointsGain);
+        break;
+      case 'dinoTamedAffinity':
+        this.updateStatPointsGain(this.dinoTamedAffinityStats, key, pointsGain);
+        break;
+    }
+  }
+
+  updateStatPointsGain(stats: any[], key: string, pointsGain: number) {
+    const stat = stats.find(stat => stat.key === key);
+    if (stat) {
+      stat.pointsGain = pointsGain;
     }
   }
 
   onSubmitPlayer() {
     if (this.playerForm.valid) {
       const playerData = this.playerForm.value;
-      this.levelStorageService.setPlayerLevelData(playerData);
-      console.log('Multiplicateurs pour joueurs sauvegardés:', playerData);
+
+      // Ajouter les IDs aux données sauvegardées
+      const playerDataWithId = this.playerStats.map(stat => ({
+        id: stat.id,
+        key: stat.key,
+        value: playerData[stat.key]
+      }));
+
+      this.levelExperienceStorageService.setPlayerLevelExperience(playerDataWithId);
+      console.log('Multiplicateurs pour joueurs sauvegardés:', playerDataWithId);
     }
   }
 
-  onSubmitDino() {
-    if (this.dinoForm.valid) {
-      const dinoData = this.dinoForm.value;
-      this.levelStorageService.setDinoLevelData(dinoData);
-      console.log('Multiplicateurs pour dinos sauvegardés:', dinoData);
+  onSubmitDinoWild() {
+    if (this.dinoWildForm.valid) {
+      const dinoWildData = this.dinoWildForm.value;
+
+      // Ajouter les IDs aux données sauvegardées
+      const dinoWildDataWithId = this.dinoWildStats.map(stat => ({
+        id: stat.id,
+        key: stat.key,
+        value: dinoWildData[stat.key]
+      }));
+
+      this.levelExperienceStorageService.setDinoWildLevelExperience(dinoWildDataWithId);
+      console.log('Multiplicateurs pour dinos sauvages sauvegardés:', dinoWildDataWithId);
+    }
+  }
+
+  onSubmitDinoTamed() {
+    if (this.dinoTamedForm.valid) {
+      const dinoTamedData = this.dinoTamedForm.value;
+
+      // Ajouter les IDs aux données sauvegardées
+      const dinoTamedDataWithId = this.dinoTamedStats.map(stat => ({
+        id: stat.id,
+        key: stat.key,
+        value: dinoTamedData[stat.key]
+      }));
+
+      this.levelExperienceStorageService.setDinoTamedLevelExperience(dinoTamedDataWithId);
+      console.log('Multiplicateurs pour dinos apprivoisés sauvegardés:', dinoTamedDataWithId);
+    }
+  }
+
+  onSubmitDinoTamedAffinity() {
+    if (this.dinoTamedAffinityForm.valid) {
+      const dinoTamedAffinityData = this.dinoTamedAffinityForm.value;
+
+      // Ajouter les IDs aux données sauvegardées
+      const dinoTamedAffinityDataWithId = this.dinoTamedAffinityStats.map(stat => ({
+        id: stat.id,
+        key: stat.key,
+        value: dinoTamedAffinityData[stat.key]
+      }));
+
+      this.levelExperienceStorageService.setDinoTamedAffinityLevelExperience(dinoTamedAffinityDataWithId);
+      console.log('Multiplicateurs pour dinos apprivoisés (affinité) sauvegardés:', dinoTamedAffinityDataWithId);
     }
   }
 }

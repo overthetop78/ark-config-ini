@@ -1,0 +1,36 @@
+<div class="loot-settings-container">
+  <h1>Configuration des Paramètres de Jeu</h1>
+
+  <form [formGroup]="lootSettingsForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Paramètre</th>
+          <th>Valeur</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="settings">
+        <tr *ngFor="let lootSettingControl of settingControls; let i = index" [formGroupName]="i">
+          <td>
+            <label>{{ lootSettingControl.value.nameFr }}</label>
+            <div class="description">
+              <em>{{ lootSettingControl.value.description }}</em>
+            </div>
+          </td>
+          <td>
+            <ng-container [ngSwitch]="isBoolean(lootSettingControl.value.value)">
+              <ng-container *ngSwitchCase="true">
+                <input type="checkbox" formControlName="value" [checked]="lootSettingControl.value.value"
+                  (change)="onBooleanChange($event, i)" />
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <input type="number" formControlName="value" min="0.01" step="0.01" />
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Sauvegarder les Paramètres</button>
+  </form>
+</div>

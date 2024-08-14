@@ -1,0 +1,40 @@
+<div class="dino-settings-container">
+  <h1>Configuration des Paramètres des Dinosaures</h1>
+
+  <form [formGroup]="dinoSettingsForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Paramètre</th>
+          <th>Valeur</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="settings">
+        <tr *ngFor="let settingControl of settingControls; let i = index" [formGroupName]="i">
+          <td>
+            <label>{{ settingControl.value.nameFr }}</label>
+            <div class="description">
+              <em>{{ settingControl.value.description }}</em>
+            </div>
+          </td>
+          <td>
+            <!-- Affichage conditionnel -->
+            <ng-container [ngSwitch]="isBoolean(settingControl.value.value)">
+              <!-- Pour les valeurs booléennes -->
+              <ng-container *ngSwitchCase="true">
+                <input type="checkbox" formControlName="value" [checked]="settingControl.value.value"
+                  (change)="onBooleanChange($event, i)" />
+              </ng-container>
+
+              <!-- Pour les autres types -->
+              <ng-container *ngSwitchDefault>
+                <input type="number" formControlName="value" min="0.01" step="0.01" />
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Sauvegarder la Configuration</button>
+  </form>
+</div>

@@ -20,7 +20,7 @@ export class LevelExperienceGenerator {
 
 
     // Génération du texte pour les joueurs
-    let experienceText = 'LevelExperienceRampOverrides=(';
+    let experienceText = 'LevelExperienceRampOverrides=(ExperiencePointsForLevel[0]=1,';
     for (let i = 1; i <= playerData.maxLevel; i++) {
       let experiencePoints = Math.floor(playerData.multiplier * Math.pow(i, playerData.ratio / 5) * Math.log(i + playerData.ratio));
       experienceText += `ExperiencePointsForLevel[${i}]=${experiencePoints}`;
@@ -32,7 +32,7 @@ export class LevelExperienceGenerator {
     experienceText += ')';
 
     // Génération du texte pour les dinosaures
-    let dinoExperienceText = 'LevelExperienceRampOverrides=(';
+    let dinoExperienceText = 'LevelExperienceRampOverrides=(ExperiencePointsForLevel[0]=1,';
     for (let i = 1; i <= dinoData.maxLevel; i++) {
       let experiencePoints = Math.floor(dinoData.multiplier * Math.pow(i, dinoData.ratio / 5) * Math.log(i + dinoData.ratio) * 1.5);
       dinoExperienceText += `ExperiencePointsForLevel[${i}]=${experiencePoints}`;

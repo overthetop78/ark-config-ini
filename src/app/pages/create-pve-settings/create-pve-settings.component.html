@@ -1,0 +1,36 @@
+<div class="pve-settings-container">
+  <h1>Configuration des Paramètres PvE</h1>
+
+  <form [formGroup]="pveSettingsForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Paramètre</th>
+          <th>Valeur</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="settings">
+        <tr *ngFor="let pveSettingControl of settingControls; let i = index" [formGroupName]="i">
+          <td>
+            <label>{{ pveSettingControl.value.nameFr }}</label>
+            <div class="description">
+              <em>{{ pveSettingControl.value.description }}</em>
+            </div>
+          </td>
+          <td>
+            <ng-container [ngSwitch]="isBoolean(pveSettingControl.value.value)">
+              <ng-container *ngSwitchCase="true">
+                <input type="checkbox" formControlName="value" [checked]="pveSettingControl.value.value"
+                  (change)="onBooleanChange($event, i)" />
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <input type="number" formControlName="value" min="0" step="1" />
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Sauvegarder les Paramètres</button>
+  </form>
+</div>

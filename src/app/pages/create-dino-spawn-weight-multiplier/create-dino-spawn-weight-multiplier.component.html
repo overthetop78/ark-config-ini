@@ -1,0 +1,30 @@
+<div class="dino-spawn-container">
+  <h1>Configuration du Taux de Reproduction des Dinosaures</h1>
+  <form [formGroup]="dinoSpawnForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Dino</th>
+          <th>Multiplicateur</th>
+          <th>Override Limit</th>
+          <th>Pourcentage Limite</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="dinos">
+        <tr *ngFor="let dinoControl of dinoControls; let i = index" [formGroupName]="i">
+          <td>{{ dinoControl.value.nameFr }}</td>
+          <td>
+            <input type="number" formControlName="spawnWeightMultiplier" min="0.1" />
+          </td>
+          <td>
+            <input type="checkbox" formControlName="overrideSpawnLimitPercentage" />
+          </td>
+          <td>
+            <input type="number" formControlName="spawnLimitPercentage" min="0" max="1" step="0.01" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Générer Configuration</button>
+  </form>
+</div>

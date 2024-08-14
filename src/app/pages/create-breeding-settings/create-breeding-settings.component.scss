@@ -1,0 +1,105 @@
+.breeding-settings-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80vh; /* Occupation de 80% de la hauteur de l'écran */
+  overflow: hidden; /* Masquer tout débordement non prévu */
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  form {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-wrapper {
+    flex: 1;
+    overflow-y: auto; /* Défilement vertical */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0; /* Retirer le padding pour que la bordure arrondie soit visible */
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate; /* Changer la façon dont les bordures sont fusionnées */
+    border-spacing: 0; /* Éviter l'espace entre les cellules */
+    border-radius: 8px; /* Bordure arrondie sur le tableau */
+    overflow: hidden; /* Assurer que les bordures arrondies sont visibles */
+  }
+
+  th {
+    background-color: #00796b;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    position: sticky;
+    top: 0; /* Fixe l'en-tête en haut */
+    z-index: 1;
+  }
+
+  td {
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  label {
+    display: block;
+    font-weight: normal;
+    font-size: 0.85rem; /* Taille de la police */
+    margin-bottom: 5px;
+  }
+
+  .description {
+    font-size: 0.7rem; /* Réduire davantage la taille du texte pour la description */
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+  }
+
+  input[type="number"] {
+    width: calc(100% - 16px); /* Réduit la largeur pour inclure le padding */
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur totale */
+  }
+
+  button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 4px;
+    background-color: #00796b;
+    color: white;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #005a4f;
+    }
+    &:disabled {
+      background-color: #ccc;
+      color: #fff;
+    }
+  }
+}

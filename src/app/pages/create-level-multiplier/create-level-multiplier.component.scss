@@ -1,5 +1,5 @@
 .multipliers-container {
-  max-width: auto; /* Augmenter la largeur globale */
+  max-width: auto; /* Largeur globale */
   margin: 0 auto;
   padding: 20px;
 
@@ -17,15 +17,22 @@
 
   .forms-wrapper {
     display: flex;
-    justify-content: space-evenly; /* Ajouter de l'espace entre les formulaires */
+    flex-direction: column; /* Organiser en colonnes pour deux rangées */
     gap: 30px;
 
-    form {
-      width: 40%; /* Augmenter légèrement la largeur */
-      padding: 0 30px; /* Réduire la hauteur globale */
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .upper-forms, .lower-forms {
+      display: flex;
+      justify-content: space-evenly; /* Ajouter de l'espace entre les formulaires */
+      gap: 30px;
+
+      form {
+        width: 45%; /* Ajuster la largeur pour deux formulaires par ligne */
+        padding: 15px 20px; /* Ajuster le padding pour réduire la hauteur globale */
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px; /* Ajouter de l'espace sous chaque formulaire */
+      }
     }
   }
 
@@ -83,7 +90,7 @@
     display: block;
     width: 100%;
     padding: 0.5rem; /* Réduire la taille du bouton */
-    margin-top: 10px;
+    margin-top: 20px;
     background-color: #007bff;
     color: white;
     border: none;
