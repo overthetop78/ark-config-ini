@@ -1,0 +1,143 @@
+.xp-settings-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80vh; /* Occupation de 80% de la hauteur de l'écran */
+  overflow: hidden; /* Masquer tout débordement non prévu */
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  form {
+    width: 100%;
+    height: calc(80vh - 60px); /* Ajuste la hauteur pour laisser de la place pour le bouton */
+    display: flex;
+    flex-direction: column;
+  }
+
+  table {
+    width: 100%;
+    height: 100%; /* Fixe la hauteur du tableau à 100% de son conteneur */
+    border-collapse: separate; /* Séparer les bordures */
+    border-spacing: 0;
+    border-radius: 8px;
+    table-layout: fixed; /* Fixer la largeur des colonnes */
+    overflow: hidden; /* Assurer que le tableau ne déborde pas */
+  }
+
+  thead {
+    width: 100%; /* Assure que le thead occupe toute la largeur disponible */
+    background-color: #00796b;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: table; /* Permet au thead de se comporter comme un tableau */
+  }
+
+  th {
+    padding: 10px;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+    box-sizing: border-box; /* Assure que le padding n'affecte pas la largeur */
+    border-bottom: 1px solid #ddd; /* Assure que la bordure du thead correspond à celle du tbody */
+    width: 75%; /* Largeur des colonnes d'en-tête pour les labels */
+  }
+
+  tbody {
+    display: block; /* Permet le défilement vertical du tbody */
+    height: calc(100% - 40px); /* Ajuste la hauteur du tbody pour compenser les en-têtes */
+    overflow-y: auto; /* Défilement vertical */
+    width: 100%; /* Assure que le tbody occupe toute la largeur */
+  }
+
+  tbody tr {
+    display: table; /* Assure que les lignes se comportent comme des lignes de tableau */
+    width: 100%; /* Assure que les lignes du tbody sont alignées avec les colonnes de l'en-tête */
+    table-layout: fixed; /* Fixer la largeur des colonnes */
+    height: 50px; /* Réduit la hauteur des lignes du tableau */
+  }
+
+  td {
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box; /* Assure que le padding n'affecte pas la largeur */
+    vertical-align: middle; /* Aligne verticalement au milieu */
+  }
+
+  td:first-child {
+    width: 75%; /* Largeur pour les cellules contenant les labels */
+    text-align: left; /* Alignement à gauche des labels */
+  }
+
+  td:last-child {
+    width: 25%; /* Largeur pour les cellules contenant les champs de saisie */
+    text-align: center; /* Centrage des champs de saisie */
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  label {
+    display: block;
+    font-weight: normal;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+  }
+
+  .description {
+    font-size: 0.7rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+  }
+
+  input[type="number"],
+  input[type="checkbox"] {
+    display: block; /* Assure que les éléments sont affichés comme des blocs pour le centrage */
+    margin: auto; /* Centre les éléments dans la cellule */
+  }
+
+  input[type="number"] {
+    width: 80%; /* Ajuste la largeur des inputs numériques */
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="checkbox"] {
+    width: auto;
+    margin: 0 auto; /* Centre le checkbox dans la cellule */
+  }
+
+  button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 4px;
+    background-color: #00796b;
+    color: white;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #005a4f;
+    }
+    &:disabled {
+      background-color: #ccc;
+      color: #fff;
+    }
+  }
+}

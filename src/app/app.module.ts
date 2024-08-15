@@ -27,6 +27,11 @@ import { CreatePvpSettingsComponent } from './pages/create-pvp-settings/create-p
 import { CreateRecipeSettingsComponent } from './pages/create-recipe-settings/create-recipe-settings.component';
 import { CreateResourceSettingsComponent } from './pages/create-resource-settings/create-resource-settings.component';
 import { CreateStructureSettingsComponent } from './pages/create-structure-settings/create-structure-settings.component';
+import { CreateEngramSettingsComponent } from './pages/create-engram-settings/create-engram-settings.component';
+import { CreateXpSettingsComponent } from './pages/create-xp-settings/create-xp-settings.component';
+import { CreateDlcGenesisSettingsComponent } from './pages/create-dlc-genesis-settings/create-dlc-genesis-settings.component';
+import { CreateObjectConfigComponent } from './pages/create-object-config/create-object-config.component';
+import { CreateConfigFileComponent } from './pages/create-config-file/create-config-file.component';
 registerLocaleData(localeFr);
 const lang: string = 'fr-FR';
 
@@ -52,6 +57,11 @@ const lang: string = 'fr-FR';
     CreateRecipeSettingsComponent,
     CreateResourceSettingsComponent,
     CreateStructureSettingsComponent,
+    CreateEngramSettingsComponent,
+    CreateXpSettingsComponent,
+    CreateDlcGenesisSettingsComponent,
+    CreateObjectConfigComponent,
+    CreateConfigFileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,37 +1,42 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PvpSettingsStorageService {
-  private pvpSettingsData: any[] = [];
-  private pvpSettingsText: string = ''; // Stocke le texte associé aux paramètres PvE
+  // BehaviorSubjects pour les données et le texte associé
+  private pvpSettingsDataSubject = new BehaviorSubject<any[]>([]);
+  pvpSettingsData$ = this.pvpSettingsDataSubject.asObservable();
+
+  private pvpSettingsTextSubject = new BehaviorSubject<string>('');
+  pvpSettingsText$ = this.pvpSettingsTextSubject.asObservable();
 
   constructor() { }
 
-  // Getter pour récupérer les données des paramètres PvE
+  // Getter pour récupérer les données des paramètres PvP
   getPvpSettingsData(): any[] {
-    return this.pvpSettingsData;
+    return this.pvpSettingsDataSubject.getValue();
   }
 
-  // Setter pour sauvegarder les données des paramètres PvE
+  // Setter pour sauvegarder les données des paramètres PvP
   setPvpSettingsData(data: any[]): void {
-    this.pvpSettingsData = data;
+    this.pvpSettingsDataSubject.next(data);
   }
 
-  // Getter pour récupérer le texte associé aux paramètres PvE
+  // Getter pour récupérer le texte associé aux paramètres PvP
   getPvpSettingsText(): string {
-    return this.pvpSettingsText;
+    return this.pvpSettingsTextSubject.getValue();
   }
 
-  // Setter pour sauvegarder le texte associé aux paramètres PvE
+  // Setter pour sauvegarder le texte associé aux paramètres PvP
   setPvpSettingsText(text: string): void {
-    this.pvpSettingsText = text;
+    this.pvpSettingsTextSubject.next(text);
   }
 
-  // Méthode pour réinitialiser les données et le texte des paramètres PvE
+  // Méthode pour réinitialiser les données et le texte des paramètres PvP
   resetPvpSettingsData(): void {
-    this.pvpSettingsData = [];
-    this.pvpSettingsText = '';
+    this.pvpSettingsDataSubject.next([]);
+    this.pvpSettingsTextSubject.next('');
   }
 }

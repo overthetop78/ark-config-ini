@@ -1,37 +1,43 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StructureSettingsStorageService {
-  private structureSettingsData: any[] = [];
-  private structureSettingsText: string = ''; // Stocke le texte associé
+  // Utilisation de BehaviorSubject pour les données des paramètres de structure
+  private structureSettingsDataSubject = new BehaviorSubject<any[]>([]);
+  structureSettingsData$ = this.structureSettingsDataSubject.asObservable();
+
+  // Utilisation de BehaviorSubject pour le texte des paramètres de structure
+  private structureSettingsTextSubject = new BehaviorSubject<string>('');
+  structureSettingsText$ = this.structureSettingsTextSubject.asObservable();
 
   constructor() { }
 
-  // Getter pour récupérer les données des paramètres de recette
+  // Getter pour récupérer les données des paramètres de structure
   getStructureSettingsData(): any[] {
-    return this.structureSettingsData;
+    return this.structureSettingsDataSubject.getValue();
   }
 
-  // Setter pour sauvegarder les données des paramètres de recette
+  // Setter pour sauvegarder les données des paramètres de structure
   setStructureSettingsData(data: any[]): void {
-    this.structureSettingsData = data;
+    this.structureSettingsDataSubject.next(data);
   }
 
-  // Getter pour récupérer le texte associé aux paramètres de recette
+  // Getter pour récupérer le texte associé aux paramètres de structure
   getStructureSettingsText(): string {
-    return this.structureSettingsText;
+    return this.structureSettingsTextSubject.getValue();
   }
 
-  // Setter pour sauvegarder le texte associé aux paramètres de recette
+  // Setter pour sauvegarder le texte associé aux paramètres de structure
   setStructureSettingsText(text: string): void {
-    this.structureSettingsText = text;
+    this.structureSettingsTextSubject.next(text);
   }
 
-  // Méthode pour réinitialiser les données et le texte des paramètres de recette
+  // Méthode pour réinitialiser les données et le texte des paramètres de structure
   resetStructureSettingsData(): void {
-    this.structureSettingsData = [];
-    this.structureSettingsText = '';
+    this.structureSettingsDataSubject.next([]);
+    this.structureSettingsTextSubject.next('');
   }
 }

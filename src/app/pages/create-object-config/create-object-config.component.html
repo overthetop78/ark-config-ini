@@ -1,0 +1,38 @@
+<div class="create-object-config-container">
+  <h1>Configuration des Objets</h1>
+
+  <form [formGroup]="objectConfigForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Empilable</th>
+          <th>Quantité Max</th>
+          <th>Ignorer le Multiplicateur</th>
+          <th>Multiplicateur de ressources</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="items">
+        <tr *ngFor="let itemControl of itemControls; let i = index" [formGroupName]="i"
+          [ngClass]="{'non-stackable': !itemControl.value.stackable}">
+          <td>
+            <label>{{ itemControl.value.nameFr }}</label>
+          </td>
+          <td>
+            <input type="checkbox" formControlName="stackable" (change)="onStackableChange(i)" />
+          </td>
+          <td>
+            <input type="number" formControlName="MaxItemQuantity" min="1" />
+          </td>
+          <td>
+            <input type="checkbox" formControlName="bIgnoreMultiplier" (change)="onIgnoreMultiplierChange(i)" />
+          </td>
+          <td>
+            <input type="number" formControlName="Multiplier" step="0.01" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Sauvegarder</button>
+  </form>
+</div>

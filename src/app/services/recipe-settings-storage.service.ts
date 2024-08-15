@@ -1,37 +1,42 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeSettingsStorageService {
-  private recipeSettingsData: any[] = [];
-  private recipeSettingsText: string = ''; // Stocke le texte associé
+  // BehaviorSubjects pour les données et le texte associé
+  private recipeSettingsDataSubject = new BehaviorSubject<any[]>([]);
+  recipeSettingsData$ = this.recipeSettingsDataSubject.asObservable();
+
+  private recipeSettingsTextSubject = new BehaviorSubject<string>('');
+  recipeSettingsText$ = this.recipeSettingsTextSubject.asObservable();
 
   constructor() { }
 
   // Getter pour récupérer les données des paramètres de recette
   getRecipeSettingsData(): any[] {
-    return this.recipeSettingsData;
+    return this.recipeSettingsDataSubject.getValue();
   }
 
   // Setter pour sauvegarder les données des paramètres de recette
   setRecipeSettingsData(data: any[]): void {
-    this.recipeSettingsData = data;
+    this.recipeSettingsDataSubject.next(data);
   }
 
   // Getter pour récupérer le texte associé aux paramètres de recette
   getRecipeSettingsText(): string {
-    return this.recipeSettingsText;
+    return this.recipeSettingsTextSubject.getValue();
   }
 
   // Setter pour sauvegarder le texte associé aux paramètres de recette
   setRecipeSettingsText(text: string): void {
-    this.recipeSettingsText = text;
+    this.recipeSettingsTextSubject.next(text);
   }
 
   // Méthode pour réinitialiser les données et le texte des paramètres de recette
   resetRecipeSettingsData(): void {
-    this.recipeSettingsData = [];
-    this.recipeSettingsText = '';
+    this.recipeSettingsDataSubject.next([]);
+    this.recipeSettingsTextSubject.next('');
   }
 }

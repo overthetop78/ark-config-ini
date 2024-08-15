@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ENGRAMS_DATA } from '../utils/constants/engrams-data.const';
 import { EngramInterface } from '../utils/interfaces/engram.interface';
 
@@ -9,8 +9,14 @@ import { EngramInterface } from '../utils/interfaces/engram.interface';
 export class EngramsStorageService {
   private engramsSubject = new BehaviorSubject<EngramInterface[]>(ENGRAMS_DATA);
   engrams$ = this.engramsSubject.asObservable();
-  // Propriété pour stocker le texte généré
-  private engramConfigText: string = '';
+
+  // Propriété pour notifier les changements
+  private engramsChangeSubject = new Subject<void>();
+  engramsChange$ = this.engramsChangeSubject.asObservable();
+
+  // Propriété pour stocker et notifier le texte généré
+  private engramConfigTextSubject = new BehaviorSubject<string>('');
+  engramConfigText$ = this.engramConfigTextSubject.asObservable();
 
   constructor() { }
 
@@ -22,6 +28,7 @@ export class EngramsStorageService {
   // Setter pour mettre à jour la liste des engrammes
   setEngrams(updatedEngrams: EngramInterface[]): void {
     this.engramsSubject.next(updatedEngrams);
+    this.engramsChangeSubject.next(); // Notifier du changement
   }
 
   // Méthode pour mettre à jour un engramme spécifique
@@ -41,12 +48,11 @@ export class EngramsStorageService {
 
   // Getter pour récupérer le texte généré
   getEngramConfigText(): string {
-    return this.engramConfigText;
+    return this.engramConfigTextSubject.getValue();
   }
 
   // Setter pour mettre à jour le texte généré
   setEngramConfigText(text: string): void {
-    this.engramConfigText = text;
+    this.engramConfigTextSubject.next(text); // Mettre à jour le texte et notifier les abonnés
   }
-
 }

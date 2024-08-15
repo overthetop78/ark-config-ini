@@ -1,97 +1,113 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LevelStorageService {
-  private playerLevelData: any;
-  private dinoLevelData: any;
-  private playerExperienceText: string = '';
-  private dinoExperienceText: string = '';
-  private overrideMaxExperiencePointsPlayer: string = '';
-  private overrideMaxExperiencePointsDino: string = '';
-  private engramPointsText: string = ''; // Nouveau texte pour les points d'engrammes
-  private engramPointsArray: { level: number, points: number }[] = []; // Nouveau tableau pour les points d'engrammes
+  // Utilisation de BehaviorSubject pour les données et textes
+  private playerLevelDataSubject = new BehaviorSubject<any>(null);
+  playerLevelData$ = this.playerLevelDataSubject.asObservable();
 
+  private dinoLevelDataSubject = new BehaviorSubject<any>(null);
+  dinoLevelData$ = this.dinoLevelDataSubject.asObservable();
+
+  private playerExperienceTextSubject = new BehaviorSubject<string>('');
+  playerExperienceText$ = this.playerExperienceTextSubject.asObservable();
+
+  private dinoExperienceTextSubject = new BehaviorSubject<string>('');
+  dinoExperienceText$ = this.dinoExperienceTextSubject.asObservable();
+
+  private overrideMaxExperiencePointsPlayerSubject = new BehaviorSubject<string>('');
+  overrideMaxExperiencePointsPlayer$ = this.overrideMaxExperiencePointsPlayerSubject.asObservable();
+
+  private overrideMaxExperiencePointsDinoSubject = new BehaviorSubject<string>('');
+  overrideMaxExperiencePointsDino$ = this.overrideMaxExperiencePointsDinoSubject.asObservable();
+
+  private engramPointsTextSubject = new BehaviorSubject<string>('');
+  engramPointsText$ = this.engramPointsTextSubject.asObservable();
+
+  private engramPointsArraySubject = new BehaviorSubject<{ level: number, points: number }[]>([]);
+  engramPointsArray$ = this.engramPointsArraySubject.asObservable();
 
   constructor() { }
 
   // Setter pour les données du joueur
   setPlayerLevelData(data: any) {
-    this.playerLevelData = data;
+    this.playerLevelDataSubject.next(data);
   }
 
   // Getter pour les données du joueur
   getPlayerLevelData() {
-    return this.playerLevelData;
+    return this.playerLevelDataSubject.getValue();
   }
 
   // Setter pour les données du dino
   setDinoLevelData(data: any) {
-    this.dinoLevelData = data;
+    this.dinoLevelDataSubject.next(data);
   }
 
   // Getter pour les données du dino
   getDinoLevelData() {
-    return this.dinoLevelData;
+    return this.dinoLevelDataSubject.getValue();
   }
 
   // Setter pour le texte d'expérience des joueurs
   setPlayerExperienceText(text: string) {
-    this.playerExperienceText = text;
+    this.playerExperienceTextSubject.next(text);
   }
 
   // Getter pour le texte d'expérience des joueurs
   getPlayerExperienceText(): string {
-    return this.playerExperienceText;
+    return this.playerExperienceTextSubject.getValue();
   }
 
   // Setter pour le texte d'expérience des dinosaures
   setDinoExperienceText(text: string) {
-    this.dinoExperienceText = text;
+    this.dinoExperienceTextSubject.next(text);
   }
 
   // Getter pour le texte d'expérience des dinosaures
   getDinoExperienceText(): string {
-    return this.dinoExperienceText;
+    return this.dinoExperienceTextSubject.getValue();
   }
 
   // Setter pour OverrideMaxExperiencePointsPlayer
   setOverrideMaxExperiencePointsPlayer(text: string) {
-    this.overrideMaxExperiencePointsPlayer = text;
+    this.overrideMaxExperiencePointsPlayerSubject.next(text);
   }
 
   // Getter pour OverrideMaxExperiencePointsPlayer
   getOverrideMaxExperiencePointsPlayer(): string {
-    return this.overrideMaxExperiencePointsPlayer;
+    return this.overrideMaxExperiencePointsPlayerSubject.getValue();
   }
 
   // Setter pour OverrideMaxExperiencePointsDino
   setOverrideMaxExperiencePointsDino(text: string) {
-    this.overrideMaxExperiencePointsDino = text;
+    this.overrideMaxExperiencePointsDinoSubject.next(text);
   }
 
   // Getter pour OverrideMaxExperiencePointsDino
   getOverrideMaxExperiencePointsDino(): string {
-    return this.overrideMaxExperiencePointsDino;
+    return this.overrideMaxExperiencePointsDinoSubject.getValue();
   }
 
   // Setter pour les points d'engrammes
   setEngramPointsText(text: string) {
-    this.engramPointsText = text;
+    this.engramPointsTextSubject.next(text);
   }
 
   // Getter pour les points d'engrammes
   getEngramPointsText(): string {
-    return this.engramPointsText;
+    return this.engramPointsTextSubject.getValue();
   }
 
   // Setters et Getters pour les points d'engrammes (tableau)
   setEngramPointsArray(array: { level: number, points: number }[]) {
-    this.engramPointsArray = array;
+    this.engramPointsArraySubject.next(array);
   }
 
   getEngramPointsArray(): { level: number, points: number }[] {
-    return this.engramPointsArray;
+    return this.engramPointsArraySubject.getValue();
   }
 }

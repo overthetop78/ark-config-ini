@@ -1,0 +1,22 @@
+<div class="create-config-file-container">
+  <h1>Créer un Fichier de Configuration</h1>
+
+  <div class="config-options">
+    <h2>Options de Configuration</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let option of configOptions">
+        <mat-icon>{{ option.icon }}</mat-icon>
+        <span>{{ option.name }}</span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div class="config-preview">
+    <h2>Aperçu du Fichier</h2>
+    <textarea readonly>{{ generateConfigFile() }}</textarea>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="downloadConfigFile()" [disabled]="getChecked(configOptions)">
+    Télécharger le Fichier
+  </button>
+</div>

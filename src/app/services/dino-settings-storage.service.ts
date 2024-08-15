@@ -1,37 +1,43 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DinoSettingsStorageService {
-  private dinoSettingsData: any[] = [];
-  private dinoSettingsText: string = ''; // Stocke le texte généré
+  // Utilisation de BehaviorSubject pour les données de réglages des dinosaures
+  private dinoSettingsDataSubject = new BehaviorSubject<any[]>([]);
+  dinoSettingsData$ = this.dinoSettingsDataSubject.asObservable();
+
+  // Utilisation de BehaviorSubject pour le texte généré
+  private dinoSettingsTextSubject = new BehaviorSubject<string>('');
+  dinoSettingsText$ = this.dinoSettingsTextSubject.asObservable();
 
   constructor() { }
 
   // Getter pour récupérer les données de réglages des dinosaures
   getDinoSettingsData(): any[] {
-    return this.dinoSettingsData;
+    return this.dinoSettingsDataSubject.getValue();
   }
 
   // Setter pour sauvegarder les données de réglages des dinosaures
   setDinoSettingsData(data: any[]): void {
-    this.dinoSettingsData = data;
+    this.dinoSettingsDataSubject.next(data);
   }
 
   // Getter pour récupérer le texte généré
   getDinoSettingsText(): string {
-    return this.dinoSettingsText;
+    return this.dinoSettingsTextSubject.getValue();
   }
 
   // Setter pour sauvegarder le texte généré
   setDinoSettingsText(text: string): void {
-    this.dinoSettingsText = text;
+    this.dinoSettingsTextSubject.next(text);
   }
 
   // Méthode pour réinitialiser les données de réglages des dinosaures
   resetDinoSettingsData(): void {
-    this.dinoSettingsData = [];
-    this.dinoSettingsText = '';
+    this.dinoSettingsDataSubject.next([]);
+    this.dinoSettingsTextSubject.next('');
   }
 }

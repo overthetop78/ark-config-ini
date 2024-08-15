@@ -1,105 +1,121 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LevelExperienceStorageService {
-  private playerLevelExperience: any = null;
-  private dinoTamedLevelExperience: any = null;
-  private dinoWildLevelExperience: any = null;
-  private dinoTamedAffinityLevelExperience: any = null;
+  // BehaviorSubject pour les données d'expérience des niveaux
+  private playerLevelExperienceSubject = new BehaviorSubject<any>(null);
+  playerLevelExperience$ = this.playerLevelExperienceSubject.asObservable();
 
-  // Variables pour stocker les textes générés
-  private playerMultiplierText: string | null = null;
-  private dinoWildMultiplierText: string | null = null;
-  private dinoTamedMultiplierText: string | null = null;
-  private dinoTamedAffinityMultiplierText: string | null = null;
+  private dinoTamedLevelExperienceSubject = new BehaviorSubject<any>(null);
+  dinoTamedLevelExperience$ = this.dinoTamedLevelExperienceSubject.asObservable();
+
+  private dinoWildLevelExperienceSubject = new BehaviorSubject<any>(null);
+  dinoWildLevelExperience$ = this.dinoWildLevelExperienceSubject.asObservable();
+
+  private dinoTamedAffinityLevelExperienceSubject = new BehaviorSubject<any>(null);
+  dinoTamedAffinityLevelExperience$ = this.dinoTamedAffinityLevelExperienceSubject.asObservable();
+
+  // BehaviorSubject pour les textes générés
+  private playerMultiplierTextSubject = new BehaviorSubject<string | null>(null);
+  playerMultiplierText$ = this.playerMultiplierTextSubject.asObservable();
+
+  private dinoWildMultiplierTextSubject = new BehaviorSubject<string | null>(null);
+  dinoWildMultiplierText$ = this.dinoWildMultiplierTextSubject.asObservable();
+
+  private dinoTamedMultiplierTextSubject = new BehaviorSubject<string | null>(null);
+  dinoTamedMultiplierText$ = this.dinoTamedMultiplierTextSubject.asObservable();
+
+  private dinoTamedAffinityMultiplierTextSubject = new BehaviorSubject<string | null>(null);
+  dinoTamedAffinityMultiplierText$ = this.dinoTamedAffinityMultiplierTextSubject.asObservable();
 
   constructor() { }
 
   // Getter et Setter pour les données d'expérience des niveaux du joueur
   getPlayerLevelExperience(): any {
-    return this.playerLevelExperience;
+    return this.playerLevelExperienceSubject.getValue();
   }
 
   setPlayerLevelExperience(data: any): void {
-    this.playerLevelExperience = data;
+    this.playerLevelExperienceSubject.next(data);
   }
 
   // Getter et Setter pour les données d'expérience des niveaux des dinos apprivoisés
   getDinoTamedLevelExperience(): any {
-    return this.dinoTamedLevelExperience;
+    return this.dinoTamedLevelExperienceSubject.getValue();
   }
 
   setDinoTamedLevelExperience(data: any): void {
-    this.dinoTamedLevelExperience = data;
+    this.dinoTamedLevelExperienceSubject.next(data);
   }
 
   // Getter et Setter pour les données d'expérience des niveaux des dinos sauvages
   getDinoWildLevelExperience(): any {
-    return this.dinoWildLevelExperience;
+    return this.dinoWildLevelExperienceSubject.getValue();
   }
 
   setDinoWildLevelExperience(data: any): void {
-    this.dinoWildLevelExperience = data;
+    this.dinoWildLevelExperienceSubject.next(data);
   }
 
   // Getter et Setter pour les données d'expérience des niveaux des dinos apprivoisés (affinité)
   getDinoTamedAffinityLevelExperience(): any {
-    return this.dinoTamedAffinityLevelExperience;
+    return this.dinoTamedAffinityLevelExperienceSubject.getValue();
   }
 
   setDinoTamedAffinityLevelExperience(data: any): void {
-    this.dinoTamedAffinityLevelExperience = data;
+    this.dinoTamedAffinityLevelExperienceSubject.next(data);
   }
 
   // Getter et Setter pour le texte du multiplicateur des joueurs
   getPlayerMultiplierText(): string | null {
-    return this.playerMultiplierText;
+    return this.playerMultiplierTextSubject.getValue();
   }
 
   setPlayerMultiplierText(text: string): void {
-    this.playerMultiplierText = text;
+    this.playerMultiplierTextSubject.next(text);
   }
 
   // Getter et Setter pour le texte du multiplicateur des dinos sauvages
   getDinoWildMultiplierText(): string | null {
-    return this.dinoWildMultiplierText;
+    return this.dinoWildMultiplierTextSubject.getValue();
   }
 
   setDinoWildMultiplierText(text: string): void {
-    this.dinoWildMultiplierText = text;
+    this.dinoWildMultiplierTextSubject.next(text);
   }
 
   // Getter et Setter pour le texte du multiplicateur des dinos apprivoisés
   getDinoTamedMultiplierText(): string | null {
-    return this.dinoTamedMultiplierText;
+    return this.dinoTamedMultiplierTextSubject.getValue();
   }
 
   setDinoTamedMultiplierText(text: string): void {
-    this.dinoTamedMultiplierText = text;
+    this.dinoTamedMultiplierTextSubject.next(text);
   }
 
   // Getter et Setter pour le texte du multiplicateur des dinos apprivoisés (affinité)
   getDinoTamedAffinityMultiplierText(): string | null {
-    return this.dinoTamedAffinityMultiplierText;
+    return this.dinoTamedAffinityMultiplierTextSubject.getValue();
   }
 
   setDinoTamedAffinityMultiplierText(text: string): void {
-    this.dinoTamedAffinityMultiplierText = text;
+    this.dinoTamedAffinityMultiplierTextSubject.next(text);
   }
 
   // Méthode pour réinitialiser les données d'expérience des niveaux
   resetLevelExperience(): void {
-    this.playerLevelExperience = null;
-    this.dinoTamedLevelExperience = null;
-    this.dinoWildLevelExperience = null;
-    this.dinoTamedAffinityLevelExperience = null;
+    this.playerLevelExperienceSubject.next(null);
+    this.dinoTamedLevelExperienceSubject.next(null);
+    this.dinoWildLevelExperienceSubject.next(null);
+    this.dinoTamedAffinityLevelExperienceSubject.next(null);
 
     // Réinitialiser également les textes générés
-    this.playerMultiplierText = null;
-    this.dinoWildMultiplierText = null;
-    this.dinoTamedMultiplierText = null;
-    this.dinoTamedAffinityMultiplierText = null;
+    this.playerMultiplierTextSubject.next(null);
+    this.dinoWildMultiplierTextSubject.next(null);
+    this.dinoTamedMultiplierTextSubject.next(null);
+    this.dinoTamedAffinityMultiplierTextSubject.next(null);
   }
 }

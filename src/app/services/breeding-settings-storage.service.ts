@@ -1,37 +1,43 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreedingSettingsStorageService {
-  private breedingSettingsData: any[] = [];
-  private breedingSettingsText: string = ''; // Stocke le texte généré
+  // Utilisation de BehaviorSubject pour les données de réglages de reproduction
+  private breedingSettingsDataSubject = new BehaviorSubject<any[]>([]);
+  breedingSettingsData$ = this.breedingSettingsDataSubject.asObservable();
+
+  // Utilisation de BehaviorSubject pour le texte généré
+  private breedingSettingsTextSubject = new BehaviorSubject<string>('');
+  breedingSettingsText$ = this.breedingSettingsTextSubject.asObservable();
 
   constructor() { }
 
   // Getter pour récupérer les données de réglages de reproduction
   getBreedingSettingsData(): any[] {
-    return this.breedingSettingsData;
+    return this.breedingSettingsDataSubject.getValue();
   }
 
   // Setter pour sauvegarder les données de réglages de reproduction
   setBreedingSettingsData(data: any[]): void {
-    this.breedingSettingsData = data;
+    this.breedingSettingsDataSubject.next(data);
   }
 
   // Getter pour récupérer le texte généré
   getBreedingSettingsText(): string {
-    return this.breedingSettingsText;
+    return this.breedingSettingsTextSubject.getValue();
   }
 
   // Setter pour sauvegarder le texte généré
   setBreedingSettingsText(text: string): void {
-    this.breedingSettingsText = text;
+    this.breedingSettingsTextSubject.next(text);
   }
 
   // Méthode pour réinitialiser les données de réglages de reproduction
   resetBreedingSettingsData(): void {
-    this.breedingSettingsData = [];
-    this.breedingSettingsText = '';
+    this.breedingSettingsDataSubject.next([]);
+    this.breedingSettingsTextSubject.next('');
   }
 }
