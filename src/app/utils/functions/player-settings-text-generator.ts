@@ -15,7 +15,6 @@ export class PlayerSettingsTextGenerator {
   generateText(): void {
     // Récupérer les paramètres depuis le service de stockage
     const params = this.playerSettingsStorageService.getPlayerSettingsData();
-    console.log(params);
 
     // Créer le texte formaté
     const formattedText = params.map(param => {

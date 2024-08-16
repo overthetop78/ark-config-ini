@@ -273,10 +273,19 @@ export class CreateEngramsComponent implements OnInit {
       // Remplir les champs du formulaire avec les valeurs calculées
       this.engramsForm.get(`level_${index}`)?.setValue(level);
       this.engramsForm.get(`points_${index}`)?.setValue(pointsArray[index]);
+      if (index > 0) {
+        this.engramsForm.get(`hidden_${index}`)?.setValue(true);
+      }
     });
 
   }
-
-
+  resetTable() {
+    this.engramDataSource.forEach((engram, index) => {
+      this.engramsForm.get(`level_${index}`)?.setValue('');
+      this.engramsForm.get(`level_${index}`)?.enable();
+      this.engramsForm.get(`points_${index}`)?.setValue('');
+      this.engramsForm.get(`hidden_${index}`)?.setValue(true);
+    });
+  }
 
 }

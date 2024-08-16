@@ -10,13 +10,11 @@
       </mat-list-item>
     </mat-list>
   </div>
-
+  <button mat-raised-button color="primary" (click)="downloadConfigFile()" [disabled]="getChecked(configOptions)">
+    Télécharger le Fichier
+  </button>
   <div class="config-preview">
     <h2>Aperçu du Fichier</h2>
     <textarea readonly>{{ generateConfigFile() }}</textarea>
   </div>
-
-  <button mat-raised-button color="primary" (click)="downloadConfigFile()" [disabled]="getChecked(configOptions)">
-    Télécharger le Fichier
-  </button>
 </div>

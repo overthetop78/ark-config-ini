@@ -21,8 +21,8 @@ export class EngramPointsCalculator {
 
     let engramPointsText = '';
     const averagePointsPerLevel = maxEngramPoints / maxLevel;
-    const minPointsPerLevel = Math.floor(averagePointsPerLevel * 0.5); // 50% de la moyenne pour les premiers niveaux
-    const maxPointsPerLevel = Math.ceil(averagePointsPerLevel * 1.5); // 150% de la moyenne pour les derniers niveaux
+    const minPointsPerLevel = Math.floor(averagePointsPerLevel * 0.4); // 50% de la moyenne pour les premiers niveaux
+    const maxPointsPerLevel = Math.ceil(averagePointsPerLevel * 1.6); // 200% de la moyenne pour les derniers niveaux
 
     let totalAssignedPoints = 0;
     const engramPointsArray: { level: number, points: number }[] = [];
@@ -40,7 +40,6 @@ export class EngramPointsCalculator {
       engramPointsText += `OverridePlayerLevelEngramPoints=${pointsForThisLevel}\n`;
       engramPointsArray.push({ level, points: pointsForThisLevel });
     }
-
     // Sauvegarder le texte et le tableau générés dans le service
     this.storageService.setEngramPointsText(engramPointsText);
     this.storageService.setEngramPointsArray(engramPointsArray);

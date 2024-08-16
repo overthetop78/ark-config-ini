@@ -44,7 +44,6 @@ export class CreateDinoSpawnWeightMultiplierComponent implements OnInit {
     const dinoSpawnData = this.dinoSpawnForm.value.dinos;
     this.dinoSpawnStorageService.setDinoSpawnData(dinoSpawnData);
     this.dinoSpawnTextGenerator.generateDinoSpawnText(); // Générer et sauvegarder le texte
-    console.log('Dino spawn data saved:', dinoSpawnData);
   }
 
   loadDinoSpawnData(): void {

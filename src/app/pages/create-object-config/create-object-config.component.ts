@@ -84,7 +84,23 @@ export class CreateObjectConfigComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const objectConfigData = this.objectConfigForm.value.items;
+    const objectConfigData: any[] = [];
+    for (let i = 0; i < this.itemControls.length; i++) {
+      const control = this.itemControls[i];
+      let disabledControl = false;
+      if (control.get('MaxItemQuantity')?.disabled) {
+        disabledControl = true;
+        control.get('MaxItemQuantity')?.enable();
+      }
+      objectConfigData.push({
+        nameFr: control.get('nameFr')?.value,
+        stackable: control.get('stackable')?.value,
+        MaxItemQuantity: control.get('MaxItemQuantity')?.value,
+        bIgnoreMultiplier: control.get('bIgnoreMultiplier')?.value,
+        Multiplier: control.get('Multiplier')?.value,
+      });
+      if (disabledControl) control.get('MaxItemQuantity')?.disable();
+    }
     this.objectStorageService.setObjectConfig(objectConfigData);
     this.objectHarvestMultiplierTextGenerator.generateText();
     this.objectQuantityTextGenerator.generateText();

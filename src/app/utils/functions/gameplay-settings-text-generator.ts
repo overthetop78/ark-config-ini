@@ -15,13 +15,11 @@ export class GameplaySettingsTextGenerator {
   generateText(): void {
     // Récupérer les paramètres depuis le service de stockage
     const params = this.gameplaySettingsStorageService.getGameplaySettingsData();
-    console.log(params);
 
     // Créer le texte formaté
     const formattedText = params.map(param => {
       return `${param.key}=${param.value}`;
     }).join('\n');
-    console.log(formattedText);
 
     // Sauvegarder le texte généré
     this.gameplaySettingsStorageService.setGameplaySettingsText(formattedText);

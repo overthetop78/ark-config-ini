@@ -15,7 +15,6 @@ export class ObjectQuantityTextGenerator {
   generateText(): void {
     // Récupérer les multiplicateurs depuis le service de stockage
     const multipliers = this.objectStorageService.getObjectConfig();
-    console.log(multipliers);
 
     // Créer le texte formaté
     const formattedText = multipliers.map(multiplier => {

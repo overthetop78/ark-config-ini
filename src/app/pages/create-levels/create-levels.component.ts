@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LevelStorageService } from 'src/app/services/level-storage.service';
 import { EngramPointsCalculator } from 'src/app/utils/functions/engram-points-calculator';
+import { LevelExperienceGenerator } from 'src/app/utils/functions/level-experience-generator';
 
 @Component({
   selector: 'app-create-levels',
@@ -28,6 +29,7 @@ export class CreateLevelsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private levelStorageService: LevelStorageService,
+    private levelExperienceGenerator: LevelExperienceGenerator
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class CreateLevelsComponent implements OnInit {
     if (this.playerForm.valid) {
       const playerData = this.playerForm.value;
       this.levelStorageService.setPlayerLevelData(playerData);
+      this.levelExperienceGenerator.generatePlayerLevelExperienceText();
       this.loadInitialData();
       // Générer les points d'engrammes
       this.generateEngramPoints(playerData);
@@ -64,6 +67,7 @@ export class CreateLevelsComponent implements OnInit {
     if (this.dinoForm.valid) {
       const dinoData = this.dinoForm.value;
       this.levelStorageService.setDinoLevelData(dinoData);
+      this.levelExperienceGenerator.generateDinoLevelExperienceText();
       this.loadInitialData();
       // Ajoute la logique pour traiter les données du formulaire dino
     }

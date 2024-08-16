@@ -15,7 +15,6 @@ export class PveSettingsTextGenerator {
   generateText(): void {
     // Récupérer les paramètres depuis le service de stockage
     const params = this.pveSettingsStorageService.getPveSettingsData();
-    console.log(params);
 
     // Créer le texte formaté
     const formattedText = params.map(param => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LevelExperienceStorageService } from 'src/app/services/level-experience-storage.service';
+import { LevelMultiplierTextGenerator } from 'src/app/utils/functions/level-multiplier-text-generator';
 
 @Component({
   selector: 'app-create-level-multiplier',
@@ -38,6 +39,7 @@ export class CreateLevelMultiplierComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private levelExperienceStorageService: LevelExperienceStorageService,
+    private levelMultiplierTextGenerator: LevelMultiplierTextGenerator
   ) {
     this.playerForm = this.fb.group(this.createFormGroup());
     this.dinoWildForm = this.fb.group(this.createFormGroup());
@@ -119,7 +121,7 @@ export class CreateLevelMultiplierComponent implements OnInit {
       }));
 
       this.levelExperienceStorageService.setPlayerLevelExperience(playerDataWithId);
-      console.log('Multiplicateurs pour joueurs sauvegardés:', playerDataWithId);
+      this.levelMultiplierTextGenerator.generatePlayerMultiplierText();
     }
   }
 
@@ -135,7 +137,7 @@ export class CreateLevelMultiplierComponent implements OnInit {
       }));
 
       this.levelExperienceStorageService.setDinoWildLevelExperience(dinoWildDataWithId);
-      console.log('Multiplicateurs pour dinos sauvages sauvegardés:', dinoWildDataWithId);
+      this.levelMultiplierTextGenerator.generateDinoWildMultiplierText();
     }
   }
 
@@ -151,7 +153,7 @@ export class CreateLevelMultiplierComponent implements OnInit {
       }));
 
       this.levelExperienceStorageService.setDinoTamedLevelExperience(dinoTamedDataWithId);
-      console.log('Multiplicateurs pour dinos apprivoisés sauvegardés:', dinoTamedDataWithId);
+      this.levelMultiplierTextGenerator.generateDinoTamedMultiplierText();
     }
   }
 
@@ -167,7 +169,7 @@ export class CreateLevelMultiplierComponent implements OnInit {
       }));
 
       this.levelExperienceStorageService.setDinoTamedAffinityLevelExperience(dinoTamedAffinityDataWithId);
-      console.log('Multiplicateurs pour dinos apprivoisés (affinité) sauvegardés:', dinoTamedAffinityDataWithId);
+      this.levelMultiplierTextGenerator.generateDinoTamedAffinityMultiplierText();
     }
   }
 }

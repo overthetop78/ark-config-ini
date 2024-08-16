@@ -19,7 +19,7 @@ export class FarmingSettingsTextGenerator {
 
     // Créer le texte formaté
     const formattedText = params.map(param => {
-      return `${param.key}=${param.defaultValue}`; // Utilise la valeur par défaut pour chaque paramètre
+      return `${param.key}=${param.value}`; // Utilise la valeur par défaut pour chaque paramètre
     }).join('\n');
 
     // Sauvegarder le texte généré
